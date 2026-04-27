@@ -387,8 +387,11 @@ footer{
   nav{padding:0 1.4rem;}
   .nav-links{display:none;}
   .hamburger{display:flex;}
-  .hero{grid-template-columns:1fr;min-height:auto;}
-  .hero-right{height:280px;}
+  .hero{grid-template-columns:1fr;min-height:56vw;height:auto;position:relative;}
+  .hero-right{display:none;}
+  .hero-bg{right:auto;left:50%;transform:translate(-50%,-50%);width:100%;height:auto;object-fit:contain;}
+  .hero-ov{background:rgba(255,255,255,.35);}
+  .hero-left{position:relative;z-index:2;padding:3rem 1.6rem 3.5rem;min-height:56vw;}
   .hero-left{padding:3rem 1.6rem 3.5rem;}
   .hero-eyebrow{font-size:1.1rem;}
   .hero-sub br{display:none;}
@@ -397,6 +400,11 @@ footer{
   .why-grid{grid-template-columns:1fr 1fr;}
   .wi{padding:2.2rem 1.8rem;}
   .ov-top{grid-template-columns:1fr;}
+  .ov-videos{height:320px;min-height:320px;}
+  .hero-right video{
+    width:100%;height:100%;object-fit:cover;
+    -webkit-playsinline:1;
+  }
   .ov-left{border-left:none;border-top:1px solid var(--line);padding:2.5rem 1.6rem;}
   .ov-bottom{padding:2rem 1.6rem;gap:1.5rem;}
   .ov-bottom-divider{display:none;}
@@ -407,7 +415,7 @@ footer{
 
 /* ─── RESPONSIVE 640px ─── */
 @media(max-width:640px){
-  .hero-right{height:220px;}
+  .hero-right{display:none;}
   .hero-left{padding:2.5rem 1.2rem 3rem;}
   .hero-eyebrow{font-size:1rem;}
   .hero-title{font-size:clamp(2.4rem,10vw,3.2rem);}
@@ -428,7 +436,7 @@ footer{
 @media(max-width:390px){
   .logo{font-size:1.35rem;}
   .logo-sub{font-size:.7rem;}
-  .hero-right{height:185px;}
+  .hero-right{display:none;}
   .hero-left{padding:2rem 1rem 2.5rem;}
   .hero-eyebrow{font-size:.9rem;}
   .hero-sub{font-size:1rem;}
@@ -507,14 +515,10 @@ footer{
   <a href="https://www.klovermarketing.co.kr/" class="logo">KLOVER<span class="logo-sub">MARKETING</span></a>
   <div class="nav-links">
   </div>
-  <button class="hamburger" id="hamburger" aria-label="메뉴">
-    <span></span><span></span><span></span>
-  </button>
+
 </nav>
 
-<!-- 모바일 드로어 -->
-<nav class="mobile-drawer" id="mobileDrawer">
-</nav>
+
 
 <!-- ① HERO -->
 <section class="hero">
@@ -528,7 +532,7 @@ footer{
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSeLKx1vUAqjT19GN5McxWVS64yQfb5CSwotcXX0nPgKnb6GFw/viewform" target="_blank" class="btn-apply">KLOVER BOX 참여 기업 모집 중 (상담 신청)</a>
   </div>
   <div class="hero-right">
-    <video id="heroVideo" src="img/kloverbox/box_m.mp4" autoplay muted loop playsinline></video>
+    <video id="heroVideo" src="img/kloverbox/box_m.mp4" autoplay muted loop playsinline webkit-playsinline x5-playsinline x5-video-player-type="h5" preload="auto"></video>
   </div>
 </section>
 
@@ -623,7 +627,7 @@ footer{
   <!-- 상단: 좌(영상 롤링) + 우(캠페인 구성 상세) -->
   <div class="ov-top">
     <div class="ov-videos">
-      <video id="ovVideo" src="img/kloverbox/box01.mp4" autoplay muted playsinline disablePictureInPicture style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;"></video>
+      <video id="ovVideo" src="img/kloverbox/box01.mp4" autoplay muted playsinline webkit-playsinline x5-playsinline preload="auto" disablePictureInPicture style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;"></video>
       <button class="ov-arrow ov-arrow-prev" onclick="ovGoPrev()" aria-label="이전 영상">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
@@ -717,22 +721,7 @@ footer{
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ── 햄버거 메뉴 ── */
-const hamburger = document.getElementById('hamburger');
-const drawer    = document.getElementById('mobileDrawer');
-hamburger.addEventListener('click', () => {
-  const open = drawer.classList.toggle('open');
-  hamburger.classList.toggle('open', open);
-});
-drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  drawer.classList.remove('open');
-  hamburger.classList.remove('open');
-}));
-document.addEventListener('click', e => {
-  if(!hamburger.contains(e.target) && !drawer.contains(e.target)){
-    drawer.classList.remove('open');
-    hamburger.classList.remove('open');
-  }
-});
+
 </script><script>
 /* ── 캠페인 영상 롤링 (화살표) ── */
 var ovSrcs = [
